@@ -1,0 +1,61 @@
+Interface:
+    orientation: 'vertical'
+
+    MDTopAppBar:
+        title: "Timer App"
+        right_action_items: [["weather-night", lambda x: app.change_theme(self)]]
+        specific_text_color: app.theme_cls.bg_normal
+
+    MDAnchorLayout:
+        # Can only have 1 widget
+        anchor_x: 'center'
+        anchor_y: 'center'
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            adaptive_height: True
+            spacing: dp(50)
+
+            MDLabel:
+                id: timer_placeholder
+                # font_name: 'digital.ttf'
+                text: '00 : 00 : 00'
+                font_size: '64sp'
+                halign: 'center'
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            MDProgressBar:
+                id: progress_bar
+                value: 50
+                size_hint: None, None
+                size: dp(250), dp(5)
+                pos_hint: {'center_x': .5}
+                type: 'indeterminate'
+
+            CustomButton:
+                size_hint: None, None
+                size: dp(250), dp(250)
+                pos_hint: {'center_x': .5}
+                radius: 25
+                md_bg_color: app.theme_cls.primary_color
+                elevation: 4
+                on_press: root.start_timer()
+
+
+                MDIcon:
+                    id: icon_placeholder
+                    icon: 'timer-play-outline'
+                    font_size: dp(200)
+                    color: app.theme_cls.bg_normal
+
+    MDFloatingActionButton:
+        icon: 'broom'
+        md_bg_color: app.theme_cls.primary_color
+
+        # Mjenja boju ikone (u mom slucaju radi i bez tog djela)
+        theme_icon_color: 'Custom'
+        icon_color: app.theme_cls.bg_normal
+
+        pos_hint: {'right': 1}
+        on_press: timer_placeholder.text = '00 : 00 : 00'
